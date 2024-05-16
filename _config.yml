@@ -30,7 +30,9 @@ github:
 
 twitter:
   username: twitter_username # change to your twitter username
-
+instagram:
+  username: thesloughje2
+  
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
@@ -38,11 +40,12 @@ social:
   email: john@jsdatascience.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your twitter homepage
+    # - https://twitter.com/username # change to your twitter homepage
     - https://github.com/SloughJE # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/johneslough/
+    - https://www.instagram.com/thesloughje2/
 
 # Site Verification Settings
 webmaster_verifications:
