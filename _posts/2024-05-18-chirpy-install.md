@@ -77,23 +77,21 @@ git rm blog/.github/workflows/pages-deploy.yml
 
 ```yaml
 name: Build and Deploy Site
+
 on:
   push:
     branches:
       - main
-      - master # Triggers on push to the main or master branch of your repository. Change if your branch is not one of these
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
+      - master  # Trigger on push to the main or master branch of your repository. Change if your branch is not one of these
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-permissions: # set permissions here so we don't have to do it manually
+permissions:
   contents: read
   pages: write
   id-token: write
+
 
 # Allow one concurrent deployment
 concurrency:
@@ -105,51 +103,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        submodules: true  # Fetch submodules
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # Fetch submodules
 
-    - name: Setup Pages
-      id: pages
-      uses: actions/configure-pages@v4
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
 
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.3
-        bundler-cache: true
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
 
-    - name: Install dependencies
-      run: |
-        cd blog
-        bundle install
-    # Installs everything necessary for Jekyll/Chirpy in the `blog` directory
+      - name: Install dependencies
+        run: |
+          cd blog
+          bundle install
+        # Installs everything necessary for Jekyll/Chirpy in the `blog` directory
 
-    - name: Build Blog Site
-      run: |
-        cd blog
-        bundle exec jekyll build -d "../_site/blog"
-      # Builds the Jekyll site in the `blog` directory, so it's served as https://yourwebsite.com/blog
-      env:
-        JEKYLL_ENV: "production"
+      - name: Build Blog Site
+        run: |
+          cd blog
+          bundle exec jekyll build
+          mkdir -p ../_site/blog  # Ensure the destination directory exists
+          mv _site/* ../_site/blog/  # Move the built blog site to the main _site/blog directory
+        env:
+          JEKYLL_ENV: "production"
+        # Builds the Jekyll site in the `blog` directory and outputs to ../_site/blog
 
-    - name: Copy Static Site Files
-      run: |
-        cp index.html _site/
-        cp style.css _site/
-        cp -r assets _site/
-        cp CNAME _site/
-      # Copies the necessary static files from the main repo into the _site directory so they are included in deployment.
-      # This includes the original website and all necessary files to render it
-      # CNAME file is needed if using a custom domain
-      # My website uses style.css and files in the `assets` directory. Change per your requirements
+      - name: Copy Static Site Files
+        run: |
+          cp index.html _site/
+          cp style.css _site/
+          cp -r assets _site/
+          cp CNAME _site/
+        # Copies the necessary static files from the main repo into the _site directory so they are included in deployment.
+        # This includes the original website and all necessary files to render it
+        # CNAME file is needed if using a custom domain
+        # My website uses style.css and files in the `assets` directory. Change per your requirements
 
-    - name: Upload site artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: "_site${{ steps.pages.outputs.base_path }}"
-      # Uploads built site to GitHub Actions, allows next step to access and publish the files
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+        # Uploads built site to GitHub Actions, allows next step to access and publish the files
 
   deploy:
     environment:
@@ -189,7 +189,12 @@ www.jsdatascience.com
 ### Step 3: Configure GitHub Pages
 Depending on your previous setup, you may or may not need to do this.
 
-Ensure GitHub Pages is configured to build from the root directory or the `gh-pages` branch, depending on your setup. This should happen automatically but it may have been changed from the previous website deployment. Go to your website repo, click on `Settings`, then `Pages` on the left. It will probably be set to `deploy from a branch`. I just leave it on the default `gh-pages` branch.
+Ensure GitHub Pages is configured to build from "GitHub Actions" for the deployment. This should happen automatically if your workflow file is correctly set up, but it's good to verify this setting to prevent any issues.
+
+1. Go to your repository on GitHub and click on `Settings`.
+2. On the left sidebar, click on `Pages`.
+3. In the "Source" section, select "GitHub Actions".
+4. Save the changes if necessary.
 
 ### Step 4: Access Your Blog
 Push all your changes to your main repo.
@@ -198,6 +203,5 @@ Once GitHub Pages has processed your changes, built and deployed the new build o
 
 That's how I was able to do it. Hopefully it will work for you!
 
-This is a test.
 
 JS
