@@ -64,16 +64,35 @@ The setup aims to keep the main site as just a static `index.html` page, while a
 
 ### Step 2: Configure GitHub Actions for Deployment
 
-The `.github/workflows/pages-deploy.yml` is a yaml file that tells GitHub how to deploy your website. This is included by default in the chirpy starter files. 
+The `.github/workflows/pages-deploy.yml` is a yaml file that tells GitHub how to deploy your website. This is included by default in the Chirpy starter files, in the `blog` directory. 
 
 We need to delete this one and put our own in the main directory.
 
 1. Delete the default one in `blog/.github/workflows/pages-deploy.yml`.
+   
 ```sh
-git rm blog/.github/workflows/pages-deploy.yml
+cd blog
+git rm .github/workflows/pages-deploy.yml
+git commit -m 'remove default deploy yaml'
+git push
+
+cd ..
+git add blog
+git commit -m "Update submodule reference"
+git push
+
 ```
 
-2. Create a new one in the main directory `.github/workflows/pages-deploy.yml`. The file should look like this:
+A quick explanation about the submodule here:
+
+`git rm .github/workflows/pages-deploy.yml`: This command removes the file from the submodule directory and stages the removal. Then we commit and push it to the submodule repo.
+
+Back in the main directory, `git add blog`: This command stages the updated submodule reference in the main repository. Commit and push that. It ensures that the main repository knows about the changes made within the submodule. You will need to do this 2 step process for any change in the blog directory.
+
+Now that the main repository is aware of the changes made within the submodule, and the updated state of the submodule is correctly reflected in the main repository, we can make the new `pages-deploy.yml` file.
+
+
+1. Create a new deployment file in the main directory `.github/workflows/pages-deploy.yml`. The file should look like this:
 
 ```yaml
 name: Build and Deploy Site
@@ -167,18 +186,9 @@ jobs:
 Then we need to just update the git repo with our changes.  
 ```sh
 git add .github/workflows/pages-deploy.yml
-git add blog
-git commit -m "Deleting and Adding new deployment workflow"
+git commit -m "Adding new deployment workflow"
 git push
 ```
-A quick explanation about the submodule here:
-
-`git rm blog/.github/workflows/pages-deploy.yml`: This command removes the file from the submodule directory and stages the removal.
-
-`git add blog`: This command stages the updated submodule reference in the main repository. It ensures that the main repository knows about the changes made within the submodule.
-
-Now the main repository is aware of the changes made within the submodule, and the updated state of the submodule is correctly reflected in the main repository.
-
 
 Also note that if you are redirecting to a custom URL, make sure to include the CNAME file (ie a file named "CNAME") in the main directory. The CNAME file specifies the custom domain for your GitHub Pages site. The file would just contain, for example:
 
