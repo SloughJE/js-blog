@@ -40,31 +40,31 @@ Create the necessary Docker setup file in the `blog` directory.
 
 #### Dockerfile
 
-    ```dockerfile
-    # Dockerfile
-    FROM ruby:3.3
+```dockerfile
+# Dockerfile
+FROM ruby:3.3
 
-    # Install Node.js (for Jekyll)
-    RUN apt-get update -qq && apt-get install -y nodejs
+# Install Node.js (for Jekyll)
+RUN apt-get update -qq && apt-get install -y nodejs
 
-    # Set working directory
-    WORKDIR /usr/src/app
+# Set working directory
+WORKDIR /usr/src/app
 
-    # Copy Gemfile and Gemfile.lock
-    COPY Gemfile Gemfile.lock ./
+# Copy Gemfile and Gemfile.lock
+COPY Gemfile Gemfile.lock ./
 
-    # Install dependencies
-    RUN gem install bundler && bundle install
+# Install dependencies
+RUN gem install bundler && bundle install
 
-    # Copy the rest of the application code
-    COPY . .
+# Copy the rest of the application code
+COPY . .
 
-    # Expose port 4000 for Jekyll
-    EXPOSE 4000
+# Expose port 4000 for Jekyll
+EXPOSE 4000
 
-    # Default command to run Jekyll server
-    CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0"]
-    ```
+# Default command to run Jekyll server
+CMD ["bundle", "exec", "jekyll", "serve", "--host", "0.0.0.0"]
+```
 
 In your `blog` directory:
 
