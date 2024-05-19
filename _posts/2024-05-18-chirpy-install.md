@@ -196,7 +196,25 @@ Also note that if you are redirecting to a custom URL, make sure to include the 
 www.jsdatascience.com
 ```
 
-### Step 3: Configure GitHub Pages
+### Step 3: Modify the Blog _config.yml
+
+In the `blog` directory, we have the `_config.yml`. We'll need to modify two things:
+
+```bash
+# Fill in the protocol & hostname for your site.
+# e.g. 'https://username.github.io', note that it does not end with a '/'.
+url: "https://jsdatascience.com"
+
+# The base URL of your blog site
+baseurl: "/blog"
+```
+
+`url` is your main site and `baseurl` is the blog site. This setting allows the blog to be placed in the [www.jsdatascience.com/blog](www.jsdatascience.com/blog) directory.
+
+Remember to add, commit and push these to the submodule repo, and update the main repo with the changes to the `_config.yml` file. 
+
+
+### Step 4: Configure GitHub Pages
 Depending on your previous setup, you may or may not need to do this.
 
 Ensure GitHub Pages is configured to build from "GitHub Actions" for the deployment. This should happen automatically if your workflow file is correctly set up, but it's good to verify this setting to prevent any issues.
@@ -206,7 +224,7 @@ Ensure GitHub Pages is configured to build from "GitHub Actions" for the deploym
 3. In the "Source" section, select "GitHub Actions".
 4. Save the changes if necessary.
 
-### Step 4: Access Your Blog
+### Step 5: Access Your Blog
 Push all your changes to your main repo.
 Click on `Actions` on your website's repo and watch it being built.
 Once GitHub Pages has processed your changes, built and deployed the new build of your website, you should be able to access your blog at `https://yourwebsite.com/blog`.
