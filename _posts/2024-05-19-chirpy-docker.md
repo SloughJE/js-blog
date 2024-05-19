@@ -7,7 +7,7 @@ tags: [Jekyll, Chirpy, blog, GitHub Pages, Submodule, Tutorial, Docker, Git]
 
 # How to use a Docker Container to View Chirpy Blog Locally
 
-The Chirpy docs say to test locally the site using:
+The Chirpy docs say to test the site locally using:
 
 ```bash
 bundle exec jekyll serve
