@@ -37,18 +37,20 @@ app.index_string = f"""
             gtag('config', '{GA_MEASUREMENT_ID}');
         </script>
         <!-- End Google Analytics -->
-        &#123;%metas%&#125;
-        &#123;%favicon%&#125;
-        &#123;%css%&#125;
+        {% raw %}
+        {{%metas%}}
+        {{%favicon%}}
+        {{%css%}}
+        {% endraw %}
     </head>
     <body>
         <div id="react-entry-point">
-            &#123;%app_entry%&#125;
+            {{%app_entry%}}
         </div>
         <footer>
-            &#123;%config%&#125;
-            &#123;%scripts%&#125;
-            &#123;%renderer%&#125;
+            {{%config%}}
+            {{%scripts%}}
+            {{%renderer%}}
         </footer>
     </body>
 </html>
@@ -108,11 +110,11 @@ This section contains JavaScript code for configuring Google Analytics.
 
 All these placeholders (`{{%css%}}`) and sections are essential for the Dash app to work properly:
 
-`{{%metas%}}`: where Dash inserts meta tags, which can include information like the character set, viewport settings, and other metadata that helps with SEO and responsive design.
+`{% raw %}{{%metas%}}{% endraw %}`: where Dash inserts meta tags, which can include information like the character set, viewport settings, and other metadata that helps with SEO and responsive design.
 
-`{{%favicon%}}`: where Dash inserts the link to the app’s favicon, the small icon displayed in the browser tab.
+`{% raw %}{{%favicon%}}{% endraw %}`: where Dash inserts the link to the app’s favicon, the small icon displayed in the browser tab.
 
-`{{%css%}}`: where Dash inserts links to your CSS stylesheets, which are necessary for styling the app.
+`{% raw %}{{%css%}}{% endraw %}`: where Dash inserts links to your CSS stylesheets, which are necessary for styling the app.
 
 ```html
 <div id="react-entry-point">
@@ -133,11 +135,11 @@ All these placeholders (`{{%css%}}`) and sections are essential for the Dash app
 ```
 `<footer>`: This contains placeholders for additional configurations and scripts necessary for the app to function.
 
-`{{%config%}}`: where Dash inserts configuration settings.
+`{% raw %}{{%config%}}{% endraw %}`: where Dash inserts configuration settings.
 
-`{{%scripts%}}`: where Dash inserts JavaScript files that the app depends on.
+`{% raw %}{{%scripts%}}{% endraw %}`: where Dash inserts JavaScript files that the app depends on.
 
-`{{%renderer%}}`: where Dash inserts the script that actually renders the Dash app.
+`{% raw %}{{%renderer%}}{% endraw %}`: where Dash inserts the script that actually renders the Dash app.
 
 ---
 
