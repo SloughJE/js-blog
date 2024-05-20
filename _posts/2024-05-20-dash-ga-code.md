@@ -133,7 +133,7 @@ All these placeholders (`{{%css%}}`) and sections are essential for the Dash app
     {{%renderer%}}
 </footer>
 ```
-`<footer>`: This contains placeholders for additional configurations and scripts necessary for the app to function.
+`<footer>`: this contains placeholders for additional configurations and scripts necessary for the app to function.
 
 `{% raw %}{{%config%}}{% endraw %}`: where Dash inserts configuration settings.
 
