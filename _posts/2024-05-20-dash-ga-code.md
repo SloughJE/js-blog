@@ -45,12 +45,17 @@ app.index_string = f"""
     </head>
     <body>
         <div id="react-entry-point">
+            {% raw %}
             {{%app_entry%}}
+            {% endraw %}
+
         </div>
         <footer>
+            {% raw %}
             {{%config%}}
             {{%scripts%}}
             {{%renderer%}}
+            {% endraw %}
         </footer>
     </body>
 </html>
@@ -92,18 +97,24 @@ This section contains JavaScript code for configuring Google Analytics.
 
 ### HTML Template Placeholders
 ```html 
+        {% raw %}
         {{%metas%}}
         {{%favicon%}}
         {{%css%}}
+        {% endraw %}
     </head>
     <body>
         <div id="react-entry-point">
+            {% raw %}
             {{%app_entry%}}
+            {% endraw %}
         </div>
         <footer>
+            {% raw %}
             {{%config%}}
             {{%scripts%}}
             {{%renderer%}}
+            {% endraw %}
         </footer>
     </body>
 ```
@@ -118,8 +129,11 @@ All these placeholders (`{{%css%}}`) and sections are essential for the Dash app
 
 ```html
 <div id="react-entry-point">
+    {% raw %}
     {{%app_entry%}}
+    {% endraw %}
 </div>
+
 ```
 `<div id="react-entry-point">`: This div is the main container for the Dash app’s content. The app’s React components will be rendered inside this div.
 
@@ -128,10 +142,13 @@ All these placeholders (`{{%css%}}`) and sections are essential for the Dash app
 
 ```html
 <footer>
+    {% raw %}
     {{%config%}}
     {{%scripts%}}
     {{%renderer%}}
+    {% endraw %}
 </footer>
+
 ```
 `<footer>`: this contains placeholders for additional configurations and scripts necessary for the app to function.
 
@@ -150,3 +167,4 @@ Goal Achieved. 🥲
 Perhaps I'll look into some alternatives in the future.
 
 JS
+
