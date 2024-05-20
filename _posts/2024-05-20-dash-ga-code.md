@@ -37,18 +37,18 @@ app.index_string = f"""
             gtag('config', '{GA_MEASUREMENT_ID}');
         </script>
         <!-- End Google Analytics -->
-        {{%metas%}}
-        {{%favicon%}}
-        {{%css%}}
+        &#123;%metas%&#125;
+        &#123;%favicon%&#125;
+        &#123;%css%&#125;
     </head>
     <body>
         <div id="react-entry-point">
-            {{%app_entry%}}
+            &#123;%app_entry%&#125;
         </div>
         <footer>
-            {{%config%}}
-            {{%scripts%}}
-            {{%renderer%}}
+            &#123;%config%&#125;
+            &#123;%scripts%&#125;
+            &#123;%renderer%&#125;
         </footer>
     </body>
 </html>
