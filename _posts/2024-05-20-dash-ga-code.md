@@ -48,7 +48,6 @@ app.index_string = f"""
             {% raw %}
             {{%app_entry%}}
             {% endraw %}
-
         </div>
         <footer>
             {% raw %}
