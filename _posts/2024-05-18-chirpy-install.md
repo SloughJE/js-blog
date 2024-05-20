@@ -229,6 +229,7 @@ Push all your changes to your main repo.
 Click on `Actions` on your website's repo and watch it being built.
 Once GitHub Pages has processed your changes, built and deployed the new build of your website, you should be able to access your blog at `https://yourwebsite.com/blog`.
 
+---
 That's how I was able to do it. Hopefully it will work for you!
 
 
